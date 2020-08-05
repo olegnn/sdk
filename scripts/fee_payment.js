@@ -89,7 +89,8 @@ async function txnByRoot(dock) {
 // Prototyping code.
 async function main() {
   await dock.init({
-    address: FullNodeEndpoint,
+    // address: FullNodeEndpoint,
+    address: 'ws://localhost:9950',
   });
 
   const alice = '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY';
@@ -139,6 +140,7 @@ async function main() {
       throw new Error('Block author was Bob but Bob\'s balance has not increased');
     }
   }
+  console.log('Works');
 }
 
 main()
