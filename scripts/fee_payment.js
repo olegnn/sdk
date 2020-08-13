@@ -15,11 +15,15 @@ const dock = new DockAPI();
 async function printBalance(name, account) {
   const { data: balance } = await dock.api.query.system.account(account);
   console.log(`${name}'s balance is ${balance.free}`);
+  // return balance.free.toHex();
 }
 
 async function getBalance(account) {
+  console.log('333>>>>>>>>>>>>>>>>');
   const { data: balance } = await dock.api.query.system.account(account);
+  console.log('444>>>>>>>>>>>>>>>>');
   return balance.free.toHex();
+  // return balance.free.toNumber();
 }
 
 async function getBlockDetails(dock, blockHash) {
@@ -34,6 +38,7 @@ async function getBlockDetails(dock, blockHash) {
 
 async function registerNewDID() {
   // DID will be generated randomly
+  console.log('111>>>>>>>>>>>>>>>>');
   const dockDID = createNewDockDID();
 
   // Generate first key with this seed. The key type is Sr25519
@@ -46,7 +51,7 @@ async function registerNewDID() {
   // The controller is same as the DID
   const keyDetail = createKeyDetail(publicKey, dockDID);
 
-  // console.log('Submitting new DID', dockDID, publicKey);
+  console.log('Submitting new DID', dockDID, publicKey);
 
   const { status } = await dock.did.new(dockDID, keyDetail);
   // const { status } = await dock.sendTransaction(transaction);
@@ -86,6 +91,10 @@ async function txnByRoot(dock) {
   return (await getBlockDetails(dock, blockHash))[2];
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Prototyping code.
 async function main() {
   await dock.init({
@@ -100,11 +109,17 @@ async function main() {
   const account = dock.keyring.addFromUri(TestAccountURI);
   dock.setAccount(account);
 
-  await disableEmissions(dock);
+  // await disableEmissions(dock);
 
   await printBalance('alice', alice);
   await printBalance('bob', bob);
+  await sleep(4000);
+  await printBalance('alice', alice);
+  await printBalance('bob', bob);
+  await sleep(4000);
+  console.log('2222>>>>>>>>>>>>>>>>');
   const aliceBalOld = await getBalance(alice);
+  console.log('00000>>>>>>>>>>>>>>>>');
   const bobBalOld = await getBalance(bob);
 
   const blockAuthor = await registerNewDID();
@@ -120,8 +135,10 @@ async function main() {
     console.log('Block author is Bob');
   }
 
+  await sleep(4000);
   await printBalance('alice', alice);
   await printBalance('bob', bob);
+  await sleep(4000);
   const aliceBalNew = await getBalance(alice);
   const bobBalNew = await getBalance(bob);
 

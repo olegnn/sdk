@@ -5,7 +5,8 @@ import { DockAPI } from '../src/api';
 const endowed = '5CUrmmBsA7oPP2uJ58yPTjZn7dUpFzD1MtRuwLdoPQyBnyWM';
 const endowedSecret = process.env['EndowedSecretURI'];
 const sudo = '5CFfPovgr1iLJ4fekiTPmtGMyg7XGmLxUnTvd1Y4GigwPqzH';
-const sudoSecret = process.env['SudoSecretURI'];
+// const sudoSecret = process.env['SudoSecretURI'];
+const sudoSecret = '//Alice';
 
 const base = 250000000;
 
@@ -26,6 +27,9 @@ const FT9SessKey = '0xbcb21cf8de9c2087f3101c826a15533e06b110023e9324631ae700c0ec
 const FT10 = '5DFN9pcRFSkyEtX67uAUrpmiBWLtrRwH6bgQX9Kqm7yVDwL4';
 const FT10SessKey = '0x76b3a5fb37113aba71fb3c2e66faa32d8cda132720c42500b4744564393d1c0f207e4d20fa034b5eee32c383dd39b17677fc08e602b96ca9f1110db925eaf051';
 
+const sebastian = '5DsDPaYqY5NDNsAmstaMvg9mSbh9xrZyi8muRD96fc5csqna';
+const sebastianSessKey = '0x76b73851b26c13e088ab17fcf1186ff24b03e0c5d902672d50f2db86ef9d690da3cb16679166f4e60b1a0991dd77863799f179f2a3412ce49f35b235a1a07c7f';
+
 async function printBalance(dock, name, account) {
   const { data: balance } = await dock.api.query.system.account(account);
   console.log(`${name}'s balance is ${balance.free}`);
@@ -40,7 +44,7 @@ async function fuelSudo(dock) {
   const account = dock.keyring.addFromUri(endowedSecret);
   dock.setAccount(account);
   const txn = dock.api.tx.balances.transfer(sudo, base * 10000);
-  const r = await dock.sendTransaction(txn, false);
+  const r = await dock.signAndSend(txn, false);
   console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
   return r;
 }
@@ -51,9 +55,10 @@ async function setSessionKeyByProxy(dock, sudoUri, validatorId, keys) {
   dock.setAccount(account);
   const txn = dock.api.tx.sudo.sudo(dock.api.tx.poAModule.setSessionKey(validatorId, keys));
   // console.log(txn);
-  const r = await dock.sendTransaction(txn, false);
-  console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
-  return r;
+  const { status } = await dock.signAndSend(txn);
+  const blockHash = status.asFinalized;
+  console.log(`Transaction finalized at blockHash ${blockHash}`);
+  return blockHash;
 }
 
 async function addValidator(dock, sudoUri, validatorId, shortCircuit) {
@@ -61,7 +66,7 @@ async function addValidator(dock, sudoUri, validatorId, shortCircuit) {
   const account = dock.keyring.addFromUri(sudoUri);
   dock.setAccount(account);
   const txn = dock.api.tx.sudo.sudo(dock.api.tx.poAModule.addValidator(validatorId, shortCircuit));
-  const r = await dock.sendTransaction(txn, false);
+  const r = await dock.signAndSend(txn);
   console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
   return r;
 }
@@ -71,7 +76,7 @@ async function setMaxActiveValidators(dock, sudoUri, count) {
   const account = dock.keyring.addFromUri(sudoUri);
   dock.setAccount(account);
   const txn = dock.api.tx.sudo.sudo(dock.api.tx.poAModule.setMaxActiveValidators(count));
-  const { status } = await dock.sendTransaction(txn);
+  const { status } = await dock.signAndSend(txn);
   const blockHash = status.asFinalized;
   console.log(`Transaction finalized at blockHash ${blockHash}`);
   return blockHash;
@@ -80,65 +85,72 @@ async function setMaxActiveValidators(dock, sudoUri, count) {
 async function main() {
   const dock = new DockAPI();
   await dock.init({
-    address: 'wss://testnet-1.dock.io',
+    // address: 'wss://testnet-1.dock.io',
+    address: 'ws://localhost:9944',
   });
 
   // const r = await fuelSudo(dock);
   // console.log(r);
   // await printBalance(dock, 'Sudo', sudo);
 
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT3, FT3SessKey);
+  // let r = await setMaxActiveValidators(dock, sudoSecret, 12);
   // console.log(r);
 
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT4, FT4SessKey);
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT3, FT3SessKey);
   // console.log(r);
 
-  // const r = await addValidator(dock, sudoSecret, FT3, false);
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT4, FT4SessKey);
   // console.log(r);
 
-  // const r = await addValidator(dock, sudoSecret, FT4, false);
+  // let r = await addValidator(dock, sudoSecret, FT3, false);
   // console.log(r);
 
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT5, FT5SessKey);
+  // let r = await addValidator(dock, sudoSecret, FT4, false);
   // console.log(r);
 
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT6, FT6SessKey);
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT5, FT5SessKey);
   // console.log(r);
 
-  // const r = await addValidator(dock, sudoSecret, FT5, false);
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT6, FT6SessKey);
   // console.log(r);
 
-  // const r = await addValidator(dock, sudoSecret, FT6, false);
+  // let r = await addValidator(dock, sudoSecret, FT5, false);
   // console.log(r);
 
-  // const r = await setMaxActiveValidators(dock, sudoSecret, 8);
-  // console.log(r);
-
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT7, FT7SessKey);
-  // console.log(r);
-
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT8, FT8SessKey);
-  // console.log(r);
-
-  // const r = await addValidator(dock, sudoSecret, FT7, false);
-  // console.log(r);
-
-  // const r = await addValidator(dock, sudoSecret, FT8, false);
+  // let r = await addValidator(dock, sudoSecret, FT6, false);
   // console.log(r);
 
   // const r = await setMaxActiveValidators(dock, sudoSecret, 10);
   // console.log(r);
 
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT9, FT9SessKey);
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT7, FT7SessKey);
   // console.log(r);
 
-  // const r = await setSessionKeyByProxy(dock, sudoSecret, FT10, FT10SessKey);
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT8, FT8SessKey);
   // console.log(r);
 
-  // const r = await addValidator(dock, sudoSecret, FT9, false);
+  // let r = await addValidator(dock, sudoSecret, FT7, false);
   // console.log(r);
 
-  // const r = await addValidator(dock, sudoSecret, FT10, false);
+  // let r = await addValidator(dock, sudoSecret, FT8, false);
+  // console.log(r);
+
+  // const r = await setMaxActiveValidators(dock, sudoSecret, 10);
+  // console.log(r);
+
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT9, FT9SessKey);
+  // console.log(r);
+
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, FT10, FT10SessKey);
+  // console.log(r);
+
+  // let r = await addValidator(dock, sudoSecret, FT9, false);
+  // console.log(r);
+
+  // let r = await addValidator(dock, sudoSecret, FT10, false);
+  // console.log(r);
+
+  // let r = await setSessionKeyByProxy(dock, sudoSecret, sebastian, sebastianSessKey);
   // console.log(r);
 
   await printBalance(dock, 'Sudo', sudo);

@@ -15,7 +15,7 @@ async function genSessionKey(nodeAddress, accountUri) {
   dock.setAccount(account);
   const key = await dock.api.rpc.author.rotateKeys();
   const hexKey = u8aToHex(key);
-  console.log(hexKey);
+  console.log(`Session key is ${hexKey}`);
   return hexKey;
 }
 
@@ -95,6 +95,8 @@ async function main() {
   // Charlie listens at 'ws://localhost:9955', Dave at 'ws://localhost:9966', Eve at 'ws://localhost:9977'
 
   const alice = '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY';
+  const aliceNode = 'ws://localhost:9944';
+
   const bob = '5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty';
 
   const charlie = '5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y';
@@ -110,6 +112,8 @@ async function main() {
 
   // Each chunk of code below generates a session key, associates that with the account id, adds the account
   // as validator and removes it. Comment/uncomment appropriately
+
+  // const sessKey = await genSessionKey(aliceNode, '//Alice');
 
   // const sessKey = await genSessionKey(charlieNode, '//Charlie');
   // await setSessionKey(dock, sessKey, '//Charlie');

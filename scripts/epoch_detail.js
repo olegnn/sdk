@@ -64,9 +64,9 @@ async function getEpochStats(dock) {
     console.log(`No of validators: ${element[1].validator_count}, starting slot: ${element[1].starting_slot.toHuman()}, expected ending slot: ${element[1].expected_ending_slot.toHuman()}, ending slot ${lastSlot}`);
     if (element[1].total_emission.isSome) {
       const totalEmission = element[1].total_emission.unwrap().toHuman();
-      const treasEmission = element[1].emission_for_treasury.unwrap().toHuman();
-      const valdEmission = element[1].emission_for_validators.unwrap().toHuman();
-      console.log(`Total emission: ${totalEmission}, Emission for Treasury: ${treasEmission}, Emission for validators: ${valdEmission}`);
+      // const treasEmission = element[1].emission_for_treasury.unwrap().toHuman();
+      // const valdEmission = element[1].emission_for_validators.unwrap().toHuman();
+      // console.log(`Total emission: ${totalEmission}, Emission for Treasury: ${treasEmission}, Emission for validators: ${valdEmission}`);
     }
     console.log('');
     // console.log(element[1][2]);
