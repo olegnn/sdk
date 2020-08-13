@@ -5,8 +5,7 @@ import { DockAPI } from '../src/api';
 const endowed = '5CUrmmBsA7oPP2uJ58yPTjZn7dUpFzD1MtRuwLdoPQyBnyWM';
 const endowedSecret = process.env['EndowedSecretURI'];
 const sudo = '5CFfPovgr1iLJ4fekiTPmtGMyg7XGmLxUnTvd1Y4GigwPqzH';
-// const sudoSecret = process.env['SudoSecretURI'];
-const sudoSecret = '//Alice';
+const sudoSecret = process.env['SudoSecretURI'];
 
 const base = 250000000;
 
@@ -28,7 +27,7 @@ const FT10 = '5DFN9pcRFSkyEtX67uAUrpmiBWLtrRwH6bgQX9Kqm7yVDwL4';
 const FT10SessKey = '0x76b3a5fb37113aba71fb3c2e66faa32d8cda132720c42500b4744564393d1c0f207e4d20fa034b5eee32c383dd39b17677fc08e602b96ca9f1110db925eaf051';
 
 const sebastian = '5DsDPaYqY5NDNsAmstaMvg9mSbh9xrZyi8muRD96fc5csqna';
-const sebastianSessKey = '0x76b73851b26c13e088ab17fcf1186ff24b03e0c5d902672d50f2db86ef9d690da3cb16679166f4e60b1a0991dd77863799f179f2a3412ce49f35b235a1a07c7f';
+const sebastianSessKey = '0xee0f244f9dc9f366dd2a591456725df412b728a72b0fb72815c3f3b7cd23c9158020b3cd9beabe8f1fc757e2186bacf8aeee9e541c286506aa1e041f2344d46b';
 
 async function printBalance(dock, name, account) {
   const { data: balance } = await dock.api.query.system.account(account);
@@ -85,8 +84,8 @@ async function setMaxActiveValidators(dock, sudoUri, count) {
 async function main() {
   const dock = new DockAPI();
   await dock.init({
-    // address: 'wss://testnet-1.dock.io',
-    address: 'ws://localhost:9944',
+    address: 'wss://testnet-1.dock.io',
+    // address: 'ws://localhost:9944',
   });
 
   // const r = await fuelSudo(dock);
@@ -153,8 +152,10 @@ async function main() {
   // let r = await setSessionKeyByProxy(dock, sudoSecret, sebastian, sebastianSessKey);
   // console.log(r);
 
-  await printBalance(dock, 'Sudo', sudo);
+  let r = await addValidator(dock, sudoSecret, sebastian, false);
+  console.log(r);
 
+  await printBalance(dock, 'Sudo', sudo);
 }
 
 main()
