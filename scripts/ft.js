@@ -70,6 +70,16 @@ async function addValidator(dock, sudoUri, validatorId, shortCircuit) {
   return r;
 }
 
+async function removeValidator(dock, sudoUri, validatorId, shortCircuit) {
+  console.log('Setting sdk account...');
+  const account = dock.keyring.addFromUri(sudoUri);
+  dock.setAccount(account);
+  const txn = dock.api.tx.sudo.sudo(dock.api.tx.poAModule.removeValidator(validatorId, shortCircuit));
+  const r = await dock.signAndSend(txn);
+  console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
+  return r;
+}
+
 async function setMaxActiveValidators(dock, sudoUri, count) {
   console.log('Setting sdk account...');
   const account = dock.keyring.addFromUri(sudoUri);
@@ -152,7 +162,7 @@ async function main() {
   // let r = await setSessionKeyByProxy(dock, sudoSecret, sebastian, sebastianSessKey);
   // console.log(r);
 
-  let r = await addValidator(dock, sudoSecret, '5GHX45255Z6TCq9TTX9SuUAvQfiYsoeeRG5sLCaWS9syWsxS', false);
+  let r = await removeValidator(dock, sudoSecret, '5GHX45255Z6TCq9TTX9SuUAvQfiYsoeeRG5sLCaWS9syWsxS', false);
   console.log(r);
 
   await printBalance(dock, 'Sudo', sudo);
