@@ -152,7 +152,7 @@ async function main() {
   // let r = await setSessionKeyByProxy(dock, sudoSecret, sebastian, sebastianSessKey);
   // console.log(r);
 
-  let r = await addValidator(dock, sudoSecret, sebastian, false);
+  let r = await addValidator(dock, sudoSecret, '5GHX45255Z6TCq9TTX9SuUAvQfiYsoeeRG5sLCaWS9syWsxS', false);
   console.log(r);
 
   await printBalance(dock, 'Sudo', sudo);
