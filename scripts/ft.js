@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+import { encodeAddress } from '@polkadot/util-crypto';
+import { u8aToHex, u8aToString, bnToU8a } from '@polkadot/util';
 import { DockAPI } from '../src/api';
 
 const endowed = '5CUrmmBsA7oPP2uJ58yPTjZn7dUpFzD1MtRuwLdoPQyBnyWM';
@@ -94,8 +96,8 @@ async function setMaxActiveValidators(dock, sudoUri, count) {
 async function main() {
   const dock = new DockAPI();
   await dock.init({
-    address: 'wss://testnet-1.dock.io',
-    // address: 'ws://localhost:9944',
+    // address: 'wss://testnet-1.dock.io',
+    address: 'ws://localhost:9944',
   });
 
   // const r = await fuelSudo(dock);
@@ -162,8 +164,16 @@ async function main() {
   // let r = await setSessionKeyByProxy(dock, sudoSecret, sebastian, sebastianSessKey);
   // console.log(r);
 
-  let r = await removeValidator(dock, sudoSecret, '5GHX45255Z6TCq9TTX9SuUAvQfiYsoeeRG5sLCaWS9syWsxS', false);
-  console.log(r);
+  // let r = await removeValidator(dock, sudoSecret, '5GHX45255Z6TCq9TTX9SuUAvQfiYsoeeRG5sLCaWS9syWsxS', false);
+  // console.log(r);
+
+  const keyOwners = await dock.api.query.session.keyOwner.entries();
+
+  keyOwners.forEach(keyOwner => {
+    console.log('key type is ', u8aToString(bnToU8a(keyOwner[0]._args[0][0])));
+    console.log('key is ', u8aToHex(keyOwner[0]._args[0][1]));
+    console.log('value is ', encodeAddress(keyOwner[1].unwrap(), 42));
+  });
 
   await printBalance(dock, 'Sudo', sudo);
 }
