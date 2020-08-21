@@ -26,7 +26,7 @@ async function setSessionKey(dock, keys, accountUri) {
   dock.setAccount(account);
   const txn = await dock.api.tx.session.setKeys(keys, []);
   // console.log(txn);
-  const r = await dock.sendTransaction(txn, false);
+  const r = await dock.signAndSend(txn);
   console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
   return r;
 }
@@ -38,7 +38,7 @@ async function setSessionKeyByProxy(dock, validatorId, keys) {
   dock.setAccount(account);
   const txn = dock.api.tx.sudo.sudo(dock.api.tx.poAModule.setSessionKey(validatorId, keys));
   // console.log(txn);
-  const r = await dock.sendTransaction(txn, false);
+  const r = await dock.signAndSend(txn);
   console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
   return r;
 }
@@ -49,7 +49,7 @@ async function addValidator(dock, validatorId, force) {
   const account = dock.keyring.addFromUri('//Alice');
   dock.setAccount(account);
   const txn = dock.api.tx.sudo.sudo(dock.api.tx.poAModule.addValidator(validatorId, force));
-  const r = await dock.sendTransaction(txn, false);
+  const r = await dock.signAndSend(txn);
   console.log(`Transaction finalized at blockHash ${r.status.asFinalized}`);
   return r;
 }
@@ -139,6 +139,10 @@ async function main() {
 
   // Testing swap of validator
   // await swapValidator(dock, charlie, dave);
+
+  let detrSessKey = '0x18d36d7e1bf16b89b1af588b75da508c7b2adf114d0e06b0c3e4b560b121782048c0b0a96958fa296e1d742b140b205e8b2378b1fea8d7a3ba80fa26fa5a0e7c';
+  await setSessionKey(dock, detrSessKey, '//Charlie');
+  await addValidator(dock, charlie, true);
 }
 
 main()

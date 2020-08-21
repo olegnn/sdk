@@ -97,7 +97,7 @@ async function main() {
   const dock = new DockAPI();
   await dock.init({
     // address: 'wss://testnet-1.dock.io',
-    address: 'ws://localhost:9944',
+    address: 'ws://localhost:9956',
   });
 
   // const r = await fuelSudo(dock);
@@ -174,6 +174,26 @@ async function main() {
     console.log('key is ', u8aToHex(keyOwner[0]._args[0][1]));
     console.log('value is ', encodeAddress(keyOwner[1].unwrap(), 42));
   });
+
+  // const key = await dock.api.rpc.poa.genSessionKeyUsingSeed('0x696e636820746f67657468657220726f6f6b696520636974792070616c616365206472616d612073686f6f7420706c61746520696e697469616c207475726b6579206372756369616c2070686f6e65');
+  // const key = await dock.api.rpc.poa.genSessionKeyUsingSeed([105, 110, 99, 104, 32, 116, 111, 103, 101, 116, 104, 101, 114, 32, 114, 111, 111, 107, 105, 101, 32, 99, 105, 116, 121, 32, 112, 97, 108, 97, 99, 101, 32, 100, 114, 97, 109, 97, 32, 115, 104, 111, 111, 116, 32, 112, 108, 97, 116, 101, 32, 105, 110, 105, 116, 105, 97, 108, 32, 116, 117, 114, 107, 101, 121, 32, 99, 114, 117, 99, 105, 97, 108, 32, 112, 104, 111, 110, 101]);
+  // const hexKey = u8aToHex(key);
+  // console.log(hexKey);
+
+  const auraKey = await dock.api.rpc.author.insertKey('aura', 
+  'tail bullet margin believe key win veteran impact turn digital matrix luxury',
+  '0x18d36d7e1bf16b89b1af588b75da508c7b2adf114d0e06b0c3e4b560b1217820'
+  );
+  console.log(auraKey);
+
+  const granKey = await dock.api.rpc.author.insertKey('gran', 
+  'legal frost decade fortune cash air scale street brush away mimic pudding',
+  '0x48c0b0a96958fa296e1d742b140b205e8b2378b1fea8d7a3ba80fa26fa5a0e7c'
+  );
+  console.log(granKey);
+
+  const hasKey = await dock.api.rpc.author.hasSessionKeys('0x18d36d7e1bf16b89b1af588b75da508c7b2adf114d0e06b0c3e4b560b121782048c0b0a96958fa296e1d742b140b205e8b2378b1fea8d7a3ba80fa26fa5a0e7c');
+  console.log(hasKey);
 
   await printBalance(dock, 'Sudo', sudo);
 }

@@ -69,6 +69,20 @@ class DockAPI {
         ...types,
         ...extraTypes,
       },
+      rpc: {
+        poa: {
+          genSessionKeyUsingSeed: {
+            description: 'gen session key using a seed',
+            params: [
+              {
+                name: 'seed',
+                type: 'Bytes'
+              }
+            ],
+            type: 'Bytes'
+          }
+        }
+      }
     });
 
     await this.initKeyring(keyring);
