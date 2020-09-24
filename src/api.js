@@ -2,26 +2,13 @@ import { ApiPromise, WsProvider, Keyring } from '@polkadot/api';
 import { cryptoWaitReady } from '@polkadot/util-crypto';
 import { KeyringPair } from '@polkadot/keyring/types'; // eslint-disable-line
 
-import BlobModule from './modules/blob';
-import DIDModule from './modules/did';
-import RevocationModule from './modules/revocation';
-import PoAModule from './modules/poa';
 import TokenMigration from './modules/migration';
+
 import types from './types.json';
 import PoaRpcDefs from './poa-rpc-defs';
 
-import {
-  PublicKey,
-  PublicKeySr25519,
-  PublicKeyEd25519,
-  PublicKeySecp256k1,
-} from './public-keys';
-
-import {
-  Signature,
-  SignatureSr25519,
-  SignatureEd25519,
-} from './signatures';
+// Default modules to load on init
+const defaultModules = ['did', 'blob', 'revocation', 'poa'];
 
 /**
  * @typedef {object} Options The Options to use in the function DockAPI.
@@ -29,7 +16,7 @@ import {
  * @property {object} [keyring] PolkadotJS keyring
  * @property {object} [chainTypes] Types for the chain
  * @property {object} [chainRpc] RPC definitions for the chain
- * @property {Boolean} [loadPoaModules] Whether to load PoA modules or not. Defaults to true
+ * @property {array} [modules] Array of module types to load
  */
 
 /** Helper class to interact with the Dock chain */
@@ -42,6 +29,7 @@ class DockAPI {
    */
   constructor(customSignTx) {
     this.customSignTx = customSignTx;
+    this.modules = {};
   }
 
   /**
@@ -50,11 +38,16 @@ class DockAPI {
    * @return {Promise} Promise for when SDK is ready for use
    */
   async init({
-    address, keyring, chainTypes, chainRpc, loadPoaModules = true,
+    address,
+    keyring,
+    chainTypes,
+    chainRpc,
+    modules = defaultModules,
   } = {
     address: null,
     keyring: null,
   }) {
+    const loadPoaModules = modules.indexOf('poa');
     if (this.api) {
       if (this.api.isConnected) {
         throw new Error('API is already connected');
@@ -80,18 +73,26 @@ class DockAPI {
       rpc,
     });
 
+    // Wait for keyring and crypto ready
     await this.initKeyring(keyring);
 
-    this.blobModule = new BlobModule(this.api, this.signAndSend.bind(this));
-    this.didModule = new DIDModule(this.api, this.signAndSend.bind(this));
-    this.revocationModule = new RevocationModule(this.api, this.signAndSend.bind(this));
+    // Load modules
+    for (let i = 0; i < modules.length; i++) {
+      await this.loadModule(modules[i]);
+    }
 
+    // Bonus token migration module if using PoA
     if (loadPoaModules) {
-      this.poaModule = new PoAModule(this.api);
       this.migrationModule = new TokenMigration(this.api);
     }
 
     return this.api;
+  }
+
+  async loadModule(type) {
+    const ModuleClass = await import('./modules/' + type);
+    const moduleInstance = new ModuleClass.default(this.api, this.signAndSend.bind(this));
+    this.modules[type] = moduleInstance;
   }
 
   async initKeyring(keyring = null) {
@@ -101,15 +102,19 @@ class DockAPI {
     }
   }
 
+  destroyModules() {
+    for (let k in this.modules) {
+      delete this.modules[k];
+    }
+  }
+
   async disconnect() {
     if (this.api) {
       if (this.api.isConnected) {
         await this.api.disconnect();
       }
       delete this.api;
-      delete this.blobModule;
-      delete this.didModule;
-      delete this.revocationModule;
+      this.destroyModules();
     }
   }
 
@@ -213,10 +218,10 @@ class DockAPI {
    * @return {BlobModule} The module to use
    */
   get blob() {
-    if (!this.blobModule) {
+    if (!this.modules['blob']) {
       throw new Error('Unable to get Blob module, SDK is not initialised');
     }
-    return this.blobModule;
+    return this.modules['blob'];
   }
 
   /**
@@ -224,10 +229,10 @@ class DockAPI {
    * @return {DIDModule} The module to use
    */
   get did() {
-    if (!this.didModule) {
+    if (!this.modules['did']) {
       throw new Error('Unable to get DID module, SDK is not initialised');
     }
-    return this.didModule;
+    return this.modules['did'];
   }
 
   /**
@@ -235,10 +240,10 @@ class DockAPI {
    * @return {RevocationModule} The module to use
    */
   get revocation() {
-    if (!this.revocationModule) {
+    if (!this.modules['revocation']) {
       throw new Error('Unable to get revocation module, SDK is not initialised');
     }
-    return this.revocationModule;
+    return this.modules['revocation'];
   }
 
   /**
@@ -246,25 +251,15 @@ class DockAPI {
    * @return {PoAModule} The module to use
    */
   get poa() {
-    if (!this.poa) {
+    if (!this.modules['poa']) {
       throw new Error('Unable to get PoA module, SDK is not initialised');
     }
-    return this.poaModule;
+    return this.modules['poa'];
   }
 }
 
 export default new DockAPI();
 export {
-  BlobModule,
   DockAPI,
-  DIDModule,
-  RevocationModule,
-  PoAModule,
-  PublicKey,
-  PublicKeySr25519,
-  PublicKeyEd25519,
-  PublicKeySecp256k1,
-  Signature,
-  SignatureSr25519,
-  SignatureEd25519,
+  defaultModules,
 };
