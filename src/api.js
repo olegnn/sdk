@@ -1,6 +1,4 @@
-import { ApiPromise, WsProvider, Keyring } from '@polkadot/api';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { KeyringPair } from '@polkadot/keyring/types'; // eslint-disable-line
+// eslint-disable-line
 
 import AnchorModule from './modules/anchor';
 import BlobModule from './modules/blob';
@@ -27,6 +25,11 @@ import {
   SignatureSr25519,
   SignatureEd25519,
 } from './signatures';
+
+const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
+/* eslint-disable no-unused-vars */
+const { KeyringPair } = require('@polkadot/keyring/types');
 
 function getExtrinsicError(data, typeDef) {
   // Loop through each of the parameters

@@ -1,5 +1,6 @@
-import { u8aToHex } from '@polkadot/util';
 import { encodeExtrinsicAsHash } from '../utils/misc';
+
+const { u8aToHex } = require('@polkadot/util');
 
 // TODO: typedefs and docstrings
 export default class CouncilModule {

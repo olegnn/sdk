@@ -1,8 +1,9 @@
 // Helpers for scripts
 
-import { ApiPromise, WsProvider, Keyring } from '@polkadot/api';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
 import types from '../src/types.json';
+
+const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
 
 /**
  * Send the give transaction with the given account URI (secret) and return the block hash

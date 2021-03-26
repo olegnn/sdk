@@ -1,4 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
 import ethr from 'ethr-did-resolver';
 import { DockAPI } from '../src/api';
 import { createNewDockDID, createKeyDetail, NoDIDError } from '../src/utils/did';
@@ -10,6 +9,8 @@ import {
 // The following can be tweaked depending on where the node is running and what
 // account is to be used for sending the transaction.
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 const universalResolverUrl = 'https://uniresolver.io';
 

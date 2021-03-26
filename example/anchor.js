@@ -30,11 +30,13 @@ import { create_proof, construct, verify_proof } from 'mrklt';
 /* eslint-disable camelcase */
 import assert from 'assert';
 import BLAKE2b from 'blake2b';
-import { randomAsU8a } from '@polkadot/util-crypto';
-import { u8aToHex } from '@polkadot/util';
+
 import { connect, keypair } from '../scripts/helpers';
 
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
+
+const { randomAsU8a } = require('@polkadot/util-crypto');
+const { u8aToHex } = require('@polkadot/util');
 
 const conn = connect(FullNodeEndpoint);
 

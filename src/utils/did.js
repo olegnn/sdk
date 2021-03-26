@@ -1,13 +1,13 @@
 // This file will be turned to a folder and will have files like `did/dock.js` and `did/ethr.js`
 
 // Import some utils from Polkadot JS
-import { randomAsHex, encodeAddress } from '@polkadot/util-crypto';
 
 import { getSignatureFromKeyringPair } from './misc';
 import { isHexWithGivenByteSize, getHexIdentifier } from './codec';
 
 import { Signature } from '../signatures'; // eslint-disable-line
 import { PublicKey } from '../public-keys'; // eslint-disable-line
+const { randomAsHex, encodeAddress } = require('@polkadot/util-crypto');
 
 export const DockDIDMethod = 'dock';
 export const DockDIDQualifier = `did:${DockDIDMethod}:`;

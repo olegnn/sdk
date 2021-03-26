@@ -1,5 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import dock from '../src/api';
 import VerifiableCredential from '../src/verifiable-credential';
 import VerifiablePresentation from '../src/verifiable-presentation';
@@ -9,6 +7,8 @@ import { createRandomRegistryId, OneOfPolicy, buildDockCredentialStatus } from '
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
 import getKeyDoc from '../src/utils/vc/helpers';
 import { DockResolver } from '../src/resolver';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 // Both issuer and holder have DIDs
 const issuerDID = createNewDockDID();

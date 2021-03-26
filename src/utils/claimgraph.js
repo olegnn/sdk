@@ -26,8 +26,9 @@
 //
 // This module implements utilities for operating on claimgraphs if the above format.
 
-import { assert } from '@polkadot/util';
 import { deepClone, assertValidClaimGraph } from './common';
+
+const { assert } = require('@polkadot/util');
 
 export const claims = { Iri: 'https://www.dock.io/rdf2020#claimsV1' };
 

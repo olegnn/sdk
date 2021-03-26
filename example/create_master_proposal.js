@@ -1,8 +1,9 @@
 // Example script creates a json-encoded proposal for master to vote on.
 
-import { u8aToHex, hexToU8a } from '@polkadot/util';
-import { randomAsU8a } from '@polkadot/util-crypto';
 import { connect } from '../scripts/helpers';
+
+const { u8aToHex, hexToU8a } = require('@polkadot/util');
+const { randomAsU8a } = require('@polkadot/util-crypto');
 
 require('dotenv').config();
 

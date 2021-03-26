@@ -1,5 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import { DockAPI } from '../../src/api';
 import { ATTESTS_IRI } from '../../src/modules/did';
 
@@ -10,6 +8,8 @@ import {
 import { FullNodeEndpoint, TestKeyringOpts, TestAccountURI } from '../test-constants';
 import { getPublicKeyFromKeyringPair, getSignatureFromKeyringPair } from '../../src/utils/misc';
 import { PublicKeyEd25519 } from '../../src/public-keys';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 describe('DID Module', () => {
   const dock = new DockAPI();

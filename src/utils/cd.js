@@ -3,13 +3,14 @@
 import deepEqual from 'deep-equal';
 import jsonld from 'jsonld';
 import { validate, prove } from 'rify';
-import { assert } from '@polkadot/util';
 import { expandedCredentialProperty } from './vc/constants';
 import { fromJsonldjsCg, merge } from './claimgraph';
 import {
   canonRules, canonProof, canonClaimGraph, decanonClaimGraph, decanonProof,
 } from './canonicalize';
 import { assertValidNode, assertType } from './common';
+
+const { assert } = require('@polkadot/util');
 
 export const expandedLogicProperty = 'https://www.dock.io/rdf2020#logicV1';
 export const expandedProofProperty = 'https://w3id.org/security#proof';

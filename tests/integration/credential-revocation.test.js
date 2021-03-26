@@ -1,5 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import { FullNodeEndpoint, TestKeyringOpts, TestAccountURI } from '../test-constants';
 import { DockAPI } from '../../src/api';
 import {
@@ -24,6 +22,8 @@ import {
 } from './helpers';
 import getKeyDoc from '../../src/utils/vc/helpers';
 import { createNewDockDID } from '../../src/utils/did';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 const credId = 'A large credential id with size > 32 bytes';
 

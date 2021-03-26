@@ -1,8 +1,6 @@
 // Mock axios
 import mockAxios from '../mocks/axios';
 
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-
 import VerifiableCredential from '../../src/verifiable-credential';
 import Schema from '../../src/modules/schema';
 import { DockBlobQualifier } from '../../src/modules/blob';
@@ -22,6 +20,8 @@ import {
 
 import exampleCredential from '../example-credential';
 import exampleSchema from '../example-schema';
+
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
 
 const exampleAuthor = 'did:dock:5CEdyZkZnALDdCAp7crTRiaCq6KViprTM6kHUQCD8X6VqGPW';
 

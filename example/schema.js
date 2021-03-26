@@ -1,4 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
 import Schema from '../src/modules/schema';
 
 import { DockAPI } from '../src/api';
@@ -13,6 +12,8 @@ import { UniversalResolver } from '../src/resolver';
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
 
 import exampleCredential from '../tests/example-credential';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 async function createAuthorDID(dock, pair) {
   // Generate a DID to be used as author

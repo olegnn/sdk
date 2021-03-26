@@ -1,8 +1,5 @@
 // Txn pricing and weights
 
-import { BTreeSet } from '@polkadot/types';
-
-import { randomAsHex } from '@polkadot/util-crypto';
 import dock from '../src/api';
 import {
   createKeyDetail,
@@ -14,6 +11,10 @@ import {
 import { getPublicKeyFromKeyringPair } from '../src/utils/misc';
 import { createRandomRegistryId, KeyringPairDidKeys, OneOfPolicy } from '../src/utils/revocation';
 import { BLOB_MAX_BYTE_SIZE } from '../src/modules/blob';
+
+const { BTreeSet } = require('@polkadot/types');
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 require('dotenv').config();
 

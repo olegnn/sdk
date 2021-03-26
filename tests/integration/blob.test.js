@@ -1,12 +1,12 @@
-import { u8aToString, u8aToHex } from '@polkadot/util';
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import { DockAPI } from '../../src/api';
 
 import { createNewDockDID, createKeyDetail, getHexIdentifierFromDID } from '../../src/utils/did';
 import { FullNodeEndpoint, TestKeyringOpts, TestAccountURI } from '../test-constants';
 import { getPublicKeyFromKeyringPair } from '../../src/utils/misc';
 import { DockBlobIdByteSize, BLOB_MAX_BYTE_SIZE } from '../../src/modules/blob';
+
+const { u8aToString, u8aToHex } = require('@polkadot/util');
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 let account;
 let pair;

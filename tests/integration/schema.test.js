@@ -1,6 +1,3 @@
-import { stringToHex } from '@polkadot/util';
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import { DockAPI } from '../../src/api';
 
 import {
@@ -18,6 +15,9 @@ import getKeyDoc from '../../src/utils/vc/helpers';
 import DockResolver from '../../src/dock-resolver';
 import { SignatureSr25519 } from '../../src/signatures';
 import { Sr25519VerKeyName } from '../../src/utils/vc/crypto/constants';
+
+const { stringToHex } = require('@polkadot/util');
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 let account;
 let pair;

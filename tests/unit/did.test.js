@@ -1,11 +1,11 @@
-import { randomAsHex, encodeAddress } from '@polkadot/util-crypto';
-
 import {
   validateDockDIDHexIdentifier,
   validateDockDIDSS58Identifier,
   getHexIdentifierFromDID,
   DockDIDQualifier,
 } from '../../src/utils/did';
+
+const { randomAsHex, encodeAddress } = require('@polkadot/util-crypto');
 
 describe('DID utilities', () => {
   test('On input as 40 byte hex, validateDockDIDIdentifier throws error', () => {

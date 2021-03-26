@@ -1,9 +1,10 @@
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { Keyring } from '@polkadot/keyring';
 import {
   Registry, DEVNODE_INFO, buildTransferTxn, signTxn,
 } from '../src/offline-signing';
 import { metadataRpc as metadata } from '../src/offline-signing/devnode-metadata.json';
+
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
+const { Keyring } = require('@polkadot/keyring');
 
 (async function main() {
   // charlie is try to send `value` tokens to dave

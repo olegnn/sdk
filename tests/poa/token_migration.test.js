@@ -1,10 +1,11 @@
-import { BTreeMap } from '@polkadot/types';
 import { cryptoWaitReady } from '@polkadot/util-crypto/index';
 import { Keyring } from '@polkadot/api/index';
 
 import { DockAPI } from '../../src/api';
 import { FullNodeEndpoint } from '../test-constants';
 import { getFreeBalance } from './helpers';
+
+const { BTreeMap } = require('@polkadot/types');
 
 describe('Token migration', () => {
   // charlie is the migrator

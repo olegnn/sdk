@@ -1,6 +1,3 @@
-import { Keyring } from '@polkadot/api';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { encodeAddress } from '@polkadot/keyring/index';
 import { DockAPI } from '../../src/api';
 import { FullNodeEndpoint, TestKeyringOpts } from '../test-constants';
 import {
@@ -9,6 +6,10 @@ import {
   removeValidatorWithHandle,
   setSessionKeyThroughRootWithHandle, genSessionKeyForHandle, getSlotNoFromHeader, setMinEpochLengthWithHandle,
 } from './helpers';
+
+const { Keyring } = require('@polkadot/api');
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
+const { encodeAddress } = require('@polkadot/keyring/index');
 
 describe('Validator set change', () => {
   // Assumes nodes Alice, Bob and Charlie are running from a clean slate

@@ -1,7 +1,8 @@
 // Signs a master proposal using sr25519, prints the signature as hex.
 
-import { u8aToHex } from '@polkadot/util';
 import { connect, keypair } from '../helpers';
+
+const { u8aToHex } = require('@polkadot/util');
 
 require('dotenv').config();
 

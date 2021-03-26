@@ -3,8 +3,9 @@
 // of RDF nodes ({ Iri: 'https://example.com' }) and the rify-js representation
 // AKA strings.
 
-import { assert } from '@polkadot/util';
 import { assertType, assertValidNode } from './common';
+
+const { assert } = require('@polkadot/util');
 
 // Convert a Node into a cononicalized string representation.
 //

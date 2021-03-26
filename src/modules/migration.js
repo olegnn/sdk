@@ -1,5 +1,5 @@
-import { BTreeMap } from '@polkadot/types';
-import { bnToBn } from '@polkadot/util';
+const { BTreeMap } = require('@polkadot/types');
+const { bnToBn } = require('@polkadot/util');
 
 const MaxAllowedMigrations = 65535;
 

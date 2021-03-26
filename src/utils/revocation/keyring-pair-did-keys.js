@@ -1,11 +1,11 @@
-import { BTreeMap } from '@polkadot/types';
-
 import DidKeys from './did-keys';
 
 import {
   getSignatureFromKeyringPair,
 } from '../misc';
 import { getHexIdentifierFromDID } from '../did';
+
+const { BTreeMap } = require('@polkadot/types');
 
 /**
  * Abstraction over a map of DID -> Keyring

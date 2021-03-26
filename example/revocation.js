@@ -1,5 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import dock from '../src/api';
 import { createNewDockDID, createKeyDetail } from '../src/utils/did';
 import { getPublicKeyFromKeyringPair } from '../src/utils/misc';
@@ -12,6 +10,8 @@ import {
 // The following can be tweaked depending on where the node is running and what
 // account is to be used for sending the transaction.
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 // Create a random registry id
 const registryId = createRandomRegistryId();

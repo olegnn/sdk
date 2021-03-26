@@ -32,7 +32,7 @@ export function addDocument(iri, doc) {
 }
 
 export async function modifyDocument(iri, cb) {
-  let original = (await documentLoader(iri)).document;
+  const original = (await documentLoader(iri)).document;
   addDocument(iri, cb(original));
 }
 

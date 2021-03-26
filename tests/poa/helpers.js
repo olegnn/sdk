@@ -1,6 +1,7 @@
-import { u8aToHex } from '@polkadot/util/index';
-import { encodeAddress } from '@polkadot/util-crypto';
 import { DockAPI } from '../../src/api';
+
+const { u8aToHex } = require('@polkadot/util/index');
+const { encodeAddress } = require('@polkadot/util-crypto');
 
 export async function getFreeBalance(dock, account) {
   const { data: balance } = await dock.api.query.system.account(account);

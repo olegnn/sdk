@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import { construct, verify_proof } from 'mrklt';
 import BLAKE2b from 'blake2b';
-import { u8aToHex, hexToU8a } from '@polkadot/util';
 import { isHexWithGivenByteSize, normalizeToHex } from '../utils/codec';
 import NoAnchorError from '../utils/errors/no-anchor-error';
+
+const { u8aToHex, hexToU8a } = require('@polkadot/util');
 
 /** Class to create and query anchors from chain. */
 export default class AnchorModule {

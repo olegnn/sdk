@@ -1,7 +1,7 @@
 // Helpers for internal use by sdk utilities.
 // The api of this module is not guaranteed to be stable.
 
-import { assert } from '@polkadot/util';
+const { assert } = require('@polkadot/util');
 
 // deep copy a json serializable object
 export function deepClone(obj) {

@@ -1,4 +1,3 @@
-import { u8aToHex } from '@polkadot/util';
 import { canonicalize } from 'json-canonicalize';
 import { validate } from 'jsonschema';
 import axios from 'axios';
@@ -16,6 +15,8 @@ import {
 
 // Supported schemas
 import JSONSchema07 from '../utils/vc/schemas/schema-draft-07';
+
+const { u8aToHex } = require('@polkadot/util');
 
 export default class Schema {
   /**

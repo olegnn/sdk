@@ -1,11 +1,12 @@
 // Utilities for doing basic operations with chain.
 
-import { Keyring } from '@polkadot/keyring';
-import {
-  randomAsHex, cryptoWaitReady, checkAddress, blake2AsU8a,
-} from '@polkadot/util-crypto';
-import { u8aToHex, formatBalance } from '@polkadot/util';
 import { isHexWithGivenByteSize, asDockAddress } from './codec';
+
+const { Keyring } = require('@polkadot/keyring');
+const {
+  randomAsHex, cryptoWaitReady, checkAddress, blake2AsU8a,
+} = require('@polkadot/util-crypto');
+const { u8aToHex, formatBalance } = require('@polkadot/util');
 
 // XXX: Following info can be fetched from chain. Integrating in DockAPI object is an options.
 const TESTNET_ADDR_PREFIX = 21;

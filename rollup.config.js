@@ -1,14 +1,14 @@
 import json from '@rollup/plugin-json';
 // import { wasm } from '@rollup/plugin-wasm';
-import pkg from './package.json';
 import glob from 'glob';
+import pkg from './package.json';
 
-export default async function() {
+export default async function () {
   const input = {};
 
   await new Promise((resolve, reject) => {
     const dir = 'src';
-    glob(dir + '/**/*.js', null, (er, files) => {
+    glob(`${dir}/**/*.js`, null, (er, files) => {
       if (!er && files) {
         for (let i = 0; i < files.length; i++) {
           const fileName = files[i].substr(dir.length + 1);
@@ -46,8 +46,8 @@ export default async function() {
       // },
       {
         dir: 'dist',
-        format: 'cjs'
-      }
-    ]
+        format: 'cjs',
+      },
+    ],
   }];
-};
+}

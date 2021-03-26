@@ -2,9 +2,10 @@
 // Master::execute() transaction.
 // Assumes all signature are Sr25519.
 
-import { schnorrkelVerify } from '@polkadot/util-crypto/schnorrkel';
-import { u8aToHex, assert } from '@polkadot/util';
 import { keypair, connect } from '../helpers';
+
+const { schnorrkelVerify } = require('@polkadot/util-crypto/schnorrkel');
+const { u8aToHex, assert } = require('@polkadot/util');
 
 const { promises: fs } = require('fs');
 

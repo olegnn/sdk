@@ -1,10 +1,11 @@
-import { randomAsHex } from '@polkadot/util-crypto';
 import dock, { DockAPI } from '../src/api';
 import {
   createNewDockDID, createKeyDetail, createSignedKeyUpdate, createSignedDidRemoval, getHexIdentifierFromDID,
 } from '../src/utils/did';
 import { getPublicKeyFromKeyringPair } from '../src/utils/misc';
 import { sendBatch } from './helpers';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 require('dotenv').config();
 

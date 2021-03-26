@@ -2,9 +2,10 @@
 // using the same seed and insert them in the keystore. This is useful when an entity needs to run several nodes as validators
 // by all nodes having the same session key in their keystore but only one of them running as a validator (with flag `--validator`)
 
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { u8aToHex } from '@polkadot/util';
 import dock from '../src/api';
+
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
+const { u8aToHex } = require('@polkadot/util');
 
 require('dotenv').config();
 

@@ -1,6 +1,4 @@
 // Import some utils from Polkadot JS
-import { randomAsHex } from '@polkadot/util-crypto';
-
 // Import Dock API
 import dock, {
   PublicKeySr25519,
@@ -13,6 +11,8 @@ import { getPublicKeyFromKeyringPair } from '../src/utils/misc';
 // The following can be tweaked depending on where the node is running and what
 // account is to be used for sending the transaction.
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 // DID will be generated randomly
 const dockDID = createNewDockDID();

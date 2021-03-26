@@ -1,6 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
-import { u8aToString } from '@polkadot/util';
-
 import { DockAPI } from '../src/api';
 import { DockBlobIdByteSize } from '../src/modules/blob';
 import { createNewDockDID, createKeyDetail, getHexIdentifierFromDID } from '../src/utils/did';
@@ -9,6 +6,9 @@ import { getPublicKeyFromKeyringPair } from '../src/utils/misc';
 // The following can be tweaked depending on where the node is running and what
 // account is to be used for sending the transaction.
 import { FullNodeEndpoint, TestAccountURI } from '../tests/test-constants';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
+const { u8aToString } = require('@polkadot/util');
 
 async function writeAndReadBlob(dock, blobValue, dockDID, pair) {
   const blobId = randomAsHex(DockBlobIdByteSize);

@@ -1,5 +1,5 @@
-import { u8aToHex } from '@polkadot/util';
-import { decodeAddress, encodeAddress } from '@polkadot/util-crypto';
+const { u8aToHex } = require('@polkadot/util');
+const { decodeAddress, encodeAddress } = require('@polkadot/util-crypto');
 
 /**
  * Check if the given input is hexadecimal or not. Optionally checks for the byte size of the hex. Case-insensitive on hex chars

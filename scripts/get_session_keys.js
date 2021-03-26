@@ -1,6 +1,6 @@
 // Script to print session keys of the current validators
 
-import { u8aToString, bnToU8a, u8aToHex } from '@polkadot/util';
+contt { u8aToString, bnToU8a, u8aToHex } = require('@polkadot/util');
 import { asDockAddress } from '../src/utils/codec';
 import dock from '../src/api';
 

@@ -1,8 +1,9 @@
-import { ApiPromise, WsProvider, Keyring } from '@polkadot/api';
-import { cryptoWaitReady, randomAsU8a } from '@polkadot/util-crypto';
-import { assert, u8aToHex, stringToU8a } from '@polkadot/util';
 import { FullNodeEndpoint, TestAccountURI } from '../test-constants';
 import types from '../../src/types.json';
+
+const { ApiPromise, WsProvider, Keyring } = require('@polkadot/api');
+const { cryptoWaitReady, randomAsU8a } = require('@polkadot/util-crypto');
+const { assert, u8aToHex, stringToU8a } = require('@polkadot/util');
 
 const ALICE_DID = u8aToHex(stringToU8a('Alice\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'));
 const BOB_DID = u8aToHex(stringToU8a('Bob\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'));

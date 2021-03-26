@@ -1,5 +1,4 @@
 // Mock axios
-import { randomAsHex } from '@polkadot/util-crypto';
 import mockAxios from '../mocks/axios';
 
 import {
@@ -14,6 +13,8 @@ import { getUnsignedCred, registerNewDIDUsingPair } from './helpers';
 import { generateEcdsaSecp256k1Keypair } from '../../src/utils/misc';
 import { issueCredential, verifyCredential } from '../../src/utils/vc/index';
 import getKeyDoc from '../../src/utils/vc/helpers';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 mockAxios();
 

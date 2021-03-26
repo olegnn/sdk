@@ -176,32 +176,32 @@ const ABI = [
 const ProxyBytecode = '0x608060405234801561001057600080fd5b506040516101493803806101498339818101604052602081101561003357600080fd5b5051600080546001600160a01b039092166001600160a01b031990921691909117905560e5806100646000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c8063245a7bfc146037578063f9120af6146059575b600080fd5b603d607e565b604080516001600160a01b039092168252519081900360200190f35b607c60048036036020811015606d57600080fd5b50356001600160a01b0316608d565b005b6000546001600160a01b031690565b600080546001600160a01b0319166001600160a01b039290921691909117905556fea2646970667358221220e6ea90ae509c1e97b506e2a0f0a3696b49e7b564a2723832159db0e2ec54c73564736f6c63430006050033';
 const ProxyABI = [{
   inputs: [{
-    internalType: "address",
-    name: "_aggregator",
-    type: "address"
+    internalType: 'address',
+    name: '_aggregator',
+    type: 'address',
   }],
-  stateMutability: "nonpayable",
-  type: "constructor"
+  stateMutability: 'nonpayable',
+  type: 'constructor',
 }, {
   inputs: [],
-  name: "aggregator",
+  name: 'aggregator',
   outputs: [{
-    internalType: "address",
-    name: "",
-    type: "address"
+    internalType: 'address',
+    name: '',
+    type: 'address',
   }],
-  stateMutability: "view",
-  type: "function"
+  stateMutability: 'view',
+  type: 'function',
 }, {
   inputs: [{
-    internalType: "address",
-    name: "_aggregator",
-    type: "address"
+    internalType: 'address',
+    name: '_aggregator',
+    type: 'address',
   }],
-  name: "setAggregator",
+  name: 'setAggregator',
   outputs: [],
-  stateMutability: "nonpayable",
-  type: "function"
+  stateMutability: 'nonpayable',
+  type: 'function',
 }];
 
 async function deploy(web3, signer) {

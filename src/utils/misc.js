@@ -1,5 +1,4 @@
 import { ec as EC } from 'elliptic';
-import { blake2AsHex } from '@polkadot/util-crypto';
 
 import {
   PublicKey, PublicKeyEd25519, PublicKeySecp256k1, PublicKeySr25519, // eslint-disable-line
@@ -7,6 +6,8 @@ import {
 import {
   Signature, SignatureEd25519, SignatureSecp256k1, SignatureSr25519, // eslint-disable-line
 } from '../signatures';
+
+const { blake2AsHex } = require('@polkadot/util-crypto');
 
 const secp256k1Curve = new EC('secp256k1');
 

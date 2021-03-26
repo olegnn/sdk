@@ -1,5 +1,3 @@
-import { encodeAddress } from '@polkadot/util-crypto';
-import { u8aToString, hexToU8a } from '@polkadot/util';
 import b58 from 'bs58';
 
 import {
@@ -8,6 +6,8 @@ import {
 import { getStateChange } from '../utils/misc';
 
 import Signature from '../signatures/signature'; // eslint-disable-line
+const { u8aToString, hexToU8a } = require('@polkadot/util');
+const { encodeAddress } = require('@polkadot/util-crypto');
 
 export const ATTESTS_IRI = 'https://rdf.dock.io/alpha/2021#attestsDocumentContents';
 

@@ -3,13 +3,14 @@
 /// Warning: This script only supports sr25519 keys. Do not use it to set an non-sr25519 public key.
 ///          If you do, you will lose control of your DID.
 
-import { Keyring } from '@polkadot/api';
-import { cryptoWaitReady } from '@polkadot/util-crypto';
-import { u8aToHex, assert } from '@polkadot/util';
 import b58 from 'bs58';
 import { createSignedKeyUpdate, getHexIdentifierFromDID } from '../src/utils/did';
 import { getPublicKeyFromKeyringPair } from '../src/utils/misc';
 import { DockAPI, PublicKeySr25519 } from '../src/api';
+
+const { Keyring } = require('@polkadot/api');
+const { cryptoWaitReady } = require('@polkadot/util-crypto');
+const { u8aToHex, assert } = require('@polkadot/util');
 
 require('dotenv').config();
 

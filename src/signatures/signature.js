@@ -1,5 +1,6 @@
-import { u8aToHex } from '@polkadot/util';
 import { isHexWithGivenByteSize } from '../utils/codec';
+
+const { u8aToHex } = require('@polkadot/util');
 
 /** Class representing a Signature. This export class should always be extended (abstract export class in some languages) */
 export default class Signature {

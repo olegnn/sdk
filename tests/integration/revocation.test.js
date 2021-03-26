@@ -1,5 +1,3 @@
-import { randomAsHex } from '@polkadot/util-crypto';
-
 import { DockAPI } from '../../src/api';
 
 import { FullNodeEndpoint, TestKeyringOpts, TestAccountURI } from '../test-constants';
@@ -9,6 +7,8 @@ import {
   KeyringPairDidKeys,
 } from '../../src/utils/revocation';
 import { registerNewDIDUsingPair } from './helpers';
+
+const { randomAsHex } = require('@polkadot/util-crypto');
 
 describe('Revocation Module', () => {
   const dock = new DockAPI();

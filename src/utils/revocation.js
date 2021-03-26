@@ -1,4 +1,3 @@
-import { randomAsHex, blake2AsHex } from '@polkadot/util-crypto';
 import jsonld from 'jsonld';
 
 import KeyringPairDidKeys from './revocation/keyring-pair-did-keys';
@@ -13,6 +12,8 @@ import {
   credentialIDField,
   credentialTypeField,
 } from './vc/constants';
+
+const { randomAsHex, blake2AsHex } = require('@polkadot/util-crypto');
 
 // The revocation registry has id with the byte size `RevRegIdByteSize`
 export const RevRegIdByteSize = 32;

@@ -1,10 +1,9 @@
-import { encodeAddress, randomAsHex } from '@polkadot/util-crypto';
-import { u8aToString, stringToHex, bufferToU8a } from '@polkadot/util';
-
 import { getSignatureFromKeyringPair, getStateChange } from '../utils/misc';
 import { isHexWithGivenByteSize, getHexIdentifier } from '../utils/codec';
 import NoBlobError from '../utils/errors/no-blob-error';
 import Signature from '../signatures/signature'; // eslint-disable-line
+const { u8aToString, stringToHex, bufferToU8a } = require('@polkadot/util');
+const { encodeAddress, randomAsHex } = require('@polkadot/util-crypto');
 
 export const DockBlobQualifier = 'blob:dock:';
 export const DockBlobIdByteSize = 32;

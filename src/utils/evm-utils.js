@@ -1,6 +1,7 @@
-import { blake2AsHex, decodeAddress } from '@polkadot/util-crypto';
-import { hexToU8a, u8aToHex, bnToBn } from '@polkadot/util';
 import { asDockAddress } from './codec';
+
+const { blake2AsHex, decodeAddress } = require('@polkadot/util-crypto');
+const { hexToU8a, u8aToHex, bnToBn } = require('@polkadot/util');
 
 require('dotenv').config();
 

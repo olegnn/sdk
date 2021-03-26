@@ -1,6 +1,3 @@
-import { cryptoWaitReady, randomAsHex } from '@polkadot/util-crypto';
-import { Keyring } from '@polkadot/api';
-
 import {
   generateEcdsaSecp256k1Keypair,
   getPublicKeyFromKeyringPair,
@@ -10,6 +7,9 @@ import {
 import { PublicKeyEd25519, PublicKeySr25519, PublicKeySecp256k1 } from '../../src/public-keys';
 import { SignatureEd25519, SignatureSr25519, SignatureSecp256k1 } from '../../src/signatures';
 import { isHexWithGivenByteSize } from '../../src/utils/codec';
+
+const { cryptoWaitReady, randomAsHex } = require('@polkadot/util-crypto');
+const { Keyring } = require('@polkadot/api');
 
 describe('Testing isHexWithGivenByteSize', () => {
   test('isHexWithGivenByteSize rejects strings not starting with 0x', () => {

@@ -1,5 +1,5 @@
 import { ethers, ContractFactory } from 'ethers';
-import { endowEVMAddressWithDefault, getEthers, getTestEVMAccountsFromEthers} from './helpers';
+import { endowEVMAddressWithDefault, getEthers, getTestEVMAccountsFromEthers } from './helpers';
 import { ERC20_BYTECODE, ERC20_ABI } from './bytecodes-and-abis';
 
 require('dotenv').config();

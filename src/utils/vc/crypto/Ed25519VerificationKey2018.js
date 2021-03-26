@@ -1,7 +1,8 @@
 import b58 from 'bs58';
-import { u8aToHex } from '@polkadot/util';
-import { signatureVerify } from '@polkadot/util-crypto/signature';
 import { Ed25519VerKeyName } from './constants';
+
+const { u8aToHex } = require('@polkadot/util');
+const { signatureVerify } = require('@polkadot/util-crypto/signature');
 
 export default class Ed25519VerificationKey2018 {
   constructor(publicKey) {

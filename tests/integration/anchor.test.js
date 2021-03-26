@@ -1,9 +1,10 @@
-import { randomAsU8a } from '@polkadot/util-crypto';
-import { u8aToHex } from '@polkadot/util';
 import { DockAPI } from '../../src/api';
 
 import { FullNodeEndpoint, TestKeyringOpts, TestAccountURI } from '../test-constants';
 import { getBlock } from '../../src/utils/chain-ops';
+
+const { randomAsU8a } = require('@polkadot/util-crypto');
+const { u8aToHex } = require('@polkadot/util');
 
 describe('Anchoring Module', () => {
   const dock = new DockAPI();
