@@ -2,7 +2,7 @@ import { suites } from 'jsonld-signatures';
 import { Ed25519SigName, Ed25519VerKeyName } from './constants';
 import Ed25519VerificationKey2018 from './Ed25519VerificationKey2018';
 
-export default class Ed25519Signature2018 extends suites.JwsLinkedDataSignature {
+export default class Ed25519Signature2018 extends suites.LinkedDataSignature {
   /**
    * Creates a new Ed25519Signature2018 instance
    * @constructor

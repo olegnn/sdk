@@ -7,9 +7,6 @@
     "type": "git",
     "url": "https://github.com/docknetwork/sdk"
   },
-  "engines": {
-    "node": ">=13.0.0"
-  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.7",
@@ -67,7 +64,7 @@
     "testEnvironment": "node"
   },
   "resolutions": {
-    "jsonld": "3.2.0",
+    "fetch-blob": "^2.1.1",
     "@polkadot/api": "3.1.1",
     "@polkadot/keyring": "5.1.1",
     "@polkadot/types": "3.1.1",
@@ -95,8 +92,8 @@
     "ipfs-http-client": "^49.0.4",
     "js-sha256": "^0.9.0",
     "json-canonicalize": "^1.0.3",
-    "jsonld": "3.2.0",
-    "jsonld-signatures": "https://github.com/docknetwork/jsonld-signatures",
+    "jsonld": "^5.0.0",
+    "jsonld-signatures": "8.0.2",
     "jsonschema": "^1.2.6",
     "mrklt": "^0.2.0",
     "n3": "^1.8.1",
